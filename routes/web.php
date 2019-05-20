@@ -17,6 +17,8 @@ Route::get('member', 'MemberController@index');
 
 Route::get('project', 'ProjectController@index');
 
+Route::get('avatars/{file}', 'MemberController@getAvatar');
+
 Route::group(['prefix' => 'ajax', 'namespace' => 'Ajax'], function () {
 	
 	Route::resource('member', 'MemberController');

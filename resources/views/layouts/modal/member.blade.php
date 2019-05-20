@@ -32,7 +32,7 @@
                             <span class="help-block" style="color: #b94a48;" ng-show="errors.avatar[0]" ng-bind="errors.avatar[0].toString()"></span>
                         </div>
                         <div class="col-sm-12 col-md-offset-2" ng-if="member.avatar != null ">
-                            <img ng-src="{{ url('uploads') }}/@{{member.avatar}}" width="100" >
+                            <img ng-src="{{ url('avatars') }}/@{{member.avatar}}" width="100">
                         </div>
                     </div>
 
@@ -47,11 +47,13 @@
                     <div class="form-group" ng-class="{'has-error' : errors.date_of_birth[0] }" >
                         <label for="date_of_birth" class="col-sm-2 control-label">Data of Birth</label>
                         <div class="col-sm-10">
-                            <input type=text date-picker 
+                            <input type='text' date-picker
                                 placeholder='MM/DD/YYYY' 
                                 maxlength="10" 
                                 ng-required='true'
-                                class='form-control' 
+                                data-language="en"
+                                data-date-format="dd-mm-yyyy"
+                                class="datepicker-here form-control"
                                 ng-model='member.date_of_birth'>
                             <span class="help-block" style="color: #b94a48;" ng-show="errors.date_of_birth[0]" ng-bind="errors.date_of_birth[0].toString()"></span>
                         </div>

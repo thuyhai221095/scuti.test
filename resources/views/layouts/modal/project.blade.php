@@ -28,11 +28,13 @@
                     <div class="form-group" ng-class="{'has-error' : errors.deadline[0] }" >
                         <label for="deadline" class="col-sm-2 control-label">Deadline</label>
                         <div class="col-sm-10">
-                            <input type=text date-picker 
+                            <input type='text' date-picker
                                 placeholder='MM/DD/YYYY' 
                                 maxlength="10" 
                                 ng-required='true'
-                                class='form-control' 
+                                data-language="en"
+                                data-date-format="dd-mm-yyyy"
+                                class="datepicker-here form-control"
                                 ng-model='project.deadline'>
                             <span class="help-block" style="color: #b94a48;" ng-show="errors.deadline[0]" ng-bind="errors.deadline[0].toString()"></span>
                         </div>

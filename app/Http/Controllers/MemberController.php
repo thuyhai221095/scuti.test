@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\TblMember;
+use File;
 
 class MemberController extends Controller
 {
@@ -16,6 +18,10 @@ class MemberController extends Controller
         return view('member');
     }
 
+    public function getAvatar($filename)
+    {
+        return response()->file(storage_path('app/public/'.$filename));
+    }
     /**
      * Show the form for creating a new resource.
      *

@@ -77,10 +77,8 @@ class MemberController extends Controller
             $input = $request->all();
             $input['date_of_birth'] = date("Y-m-d", strtotime($request->date_of_birth));
             if ($request->hasFile('avatar')) {
-                $file = $request->file('avatar');
-                $name = time().'.'.$file->getClientOriginalExtension();
-                $file->move('uploads', $name);
-                $input['avatar'] = $name;
+                $file = $request->file('avatar')->store('', 'public');
+                $input['avatar'] = $file;
             }
             $member = TblMember::create($input);
             DB::commit();
@@ -131,10 +129,8 @@ class MemberController extends Controller
             $input = $request->all();
             $input['date_of_birth'] = date("Y-m-d", strtotime($request->date_of_birth));
             if ($request->hasFile('avatar')) {
-                $file = $request->file('avatar');
-                $name = time().'.'.$file->getClientOriginalExtension();
-                $file->move('uploads', $name);
-                $input['avatar'] = $name;
+                $file = $request->file('avatar')->store('', 'public');
+                $input['avatar'] = $file;
             }
             $member->update($input);
             DB::commit();

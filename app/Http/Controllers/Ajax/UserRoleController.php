@@ -45,8 +45,8 @@ class UserRoleController extends Controller
         DB::beginTransaction();
         try {
             $rules = array(
-                'project' => 'required',
-                'member' => 'required',
+                'project_id' => 'required',
+                'member_id' => 'required',
                 'role' => 'required'
             );
             $msg = [];
@@ -57,8 +57,8 @@ class UserRoleController extends Controller
                 ));
             } else {
                 $data = new TblUserRole();
-                $data->project_id = $request->project;
-                $data->member_id = $request->member;
+                $data->project_id = $request->project_id;
+                $data->member_id = $request->member_id;
                 $data->role = $request->role;
                 $data->save();
                 DB::commit();

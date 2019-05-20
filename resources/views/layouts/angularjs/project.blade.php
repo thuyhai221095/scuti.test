@@ -137,8 +137,8 @@
 				method: 'POST',
 				url: '{{ url('ajax/user_role') }}',
 				data: {
-					'project' : $scope.project_id,
-					'member' : $scope.addRole.member,
+					'project_id' : $scope.project_id,
+					'member_id' : $scope.addRole.member,
 					'role' : $scope.addRole.role
 				}
 			}).then(function (response) {

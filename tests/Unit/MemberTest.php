@@ -3,17 +3,19 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Models\TblMember;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
+
 
 class MemberTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseTransactions;
     use WithoutMiddleware;
 
     /**
@@ -21,18 +23,18 @@ class MemberTest extends TestCase
      *
      * @return void
      */
+    
     // Test Failed
     public function testAddMemberNameEmpty()
     {
         $request = [
             'name' => '',
-            'infomation' => 'Thuy',
-            'phone' => '0984287637',
+            'infomation' => 'Info Test',
+            'phone' => '098428763733',
             'date_of_birth' => '1995-10-22',
             'position' => 'junior',
         ];
         $response = $this->call('POST', 'ajax/member', $request);
-        // dd($response);
         $this->assertDatabaseMissing('tbl_members', $request);
     }
 
@@ -40,13 +42,12 @@ class MemberTest extends TestCase
     {
         $request = [
             'name' => str_random(51),
-            'infomation' => 'Thuy',
-            'phone' => '0984287637',
+            'infomation' => 'Info Test',
+            'phone' => '098428763737',
             'date_of_birth' => '1995-10-22',
             'position' => 'junior',
         ];
         $response = $this->call('POST', 'ajax/member', $request);
-        // dd($response);
         $this->assertDatabaseMissing('tbl_members', $request);
     }
 
@@ -55,7 +56,7 @@ class MemberTest extends TestCase
         $request = [
             'name' => 'Thuy%',
             'infomation' => 'Thuy',
-            'phone' => '0984287637',
+            'phone' => '098428763765',
             'date_of_birth' => '1995-10-22',
             'position' => 'junior',
         ];
@@ -66,9 +67,9 @@ class MemberTest extends TestCase
     public function testAddMemberInfomation300Character()
     {
         $request = [
-            'name' => 'Thuy',
+            'name' => 'Demo Test',
             'infomation' => str_random(301),
-            'phone' => '0984287637',
+            'phone' => '098428763251',
             'date_of_birth' => '1995-10-22',
             'position' => 'junior',
         ];
@@ -79,7 +80,7 @@ class MemberTest extends TestCase
     public function testAddMemberPhoneEmpty()
     {
         $request = [
-            'name' => 'Thuy',
+            'name' => 'Demo Test',
             'infomation' => 'infomation',
             'phone' => '',
             'date_of_birth' => '1995-10-22',
@@ -92,8 +93,8 @@ class MemberTest extends TestCase
     public function testAddMemberPhone20Character()
     {
         $request = [
-            'name' => 'Thuy',
-            'infomation' => 'infomation',
+            'name' => 'Demo Test',
+            'infomation' => 'info test',
             'phone' => '098425786321452032151',
             'date_of_birth' => '1995-10-22',
             'position' => 'junior',
@@ -105,8 +106,8 @@ class MemberTest extends TestCase
     public function testAddMemberPhoneNumeric()
     {
         $request = [
-            'name' => 'Thuy',
-            'infomation' => 'infomation',
+            'name' => 'Demo Test',
+            'infomation' => 'Info Test',
             'phone' => '0984287619a',
             'date_of_birth' => '1995-10-22',
             'position' => 'junior',
@@ -118,9 +119,9 @@ class MemberTest extends TestCase
     public function testAddMemberDateOfBirthEmpty()
     {
         $request = [
-            'name' => 'Thuy',
-            'infomation' => 'infomation',
-            'phone' => '0984287619',
+            'name' => 'Demo Test',
+            'infomation' => 'Info Test',
+            'phone' => '098428761902',
             'date_of_birth' => '',
             'position' => 'junior',
         ];
@@ -131,9 +132,9 @@ class MemberTest extends TestCase
     public function testAddMemberDateOfBirthValidationDate()
     {
         $request = [
-            'name' => 'Thuy',
-            'infomation' => 'infomation',
-            'phone' => '0984287619',
+            'name' => 'Demo Test',
+            'infomation' => 'Info Test',
+            'phone' => '098428761911',
             'date_of_birth' => 'abc',
             'position' => 'junior',
         ];
@@ -144,9 +145,9 @@ class MemberTest extends TestCase
     public function testAddMemberDateOfBirthInTheFuture()
     {
         $request = [
-            'name' => 'Thuy',
-            'infomation' => 'infomation',
-            'phone' => '0984287619',
+            'name' => 'Demo Test',
+            'infomation' => 'Info Test',
+            'phone' => '098428761921',
             'date_of_birth' => '2019-05-21',
             'position' => 'junior',
         ];
@@ -157,9 +158,9 @@ class MemberTest extends TestCase
     public function testAddMemberDateOfBirthOlderThan60Years()
     {
         $request = [
-            'name' => 'Thuy',
-            'infomation' => 'infomation',
-            'phone' => '0984287619',
+            'name' => 'Demo Test',
+            'infomation' => 'Info Test',
+            'phone' => '0984287619333',
             'date_of_birth' => '1950-10-10',
             'position' => 'junior',
         ];
@@ -170,9 +171,9 @@ class MemberTest extends TestCase
     public function testAddMemberPositionEmpty()
     {
         $request = [
-            'name' => 'Thuy',
-            'infomation' => 'infomation',
-            'phone' => '0984287619',
+            'name' => 'Demo Test',
+            'infomation' => 'Info Test',
+            'phone' => '098428761944',
             'date_of_birth' => '1995-10-10',
             'position' => '',
         ];
@@ -184,73 +185,49 @@ class MemberTest extends TestCase
     {
         Storage::fake('avatars');
         $file = UploadedFile::fake()->image('avatar.png');
-        // test create member
         $request = [
-            'name' => 'Thuy',
-            'infomation' => 'Thuy',
-            'phone' => '0984287637',
+            'name' => 'Demo Test',
+            'infomation' => 'Info Test',
+            'phone' => '098428763733',
             'date_of_birth' => '1995-10-22',
             'position' => 'junior',
             'avatar' => $file
         ];
         $response = $this->json('POST', 'ajax/member', $request);
-        $response
-            ->assertStatus(201)
-            ->assertJson([
-                'errors' => false
-            ]);
         $request['avatar'] = $file->hashName();
         $this->assertDatabaseHas('tbl_members', $request);
     }
 
     public function testUpdateMemberSuccess()
     {
-        // test update member
-        $member = factory(TblMember::class)->create([
-            'name' => 'Thuyhai22',
-            'infomation' => 'infomation 01',
-            'phone' => '0987654321',
-            'date_of_birth' => '1995-10-22',
-            'position' => 'junior',
-        ]);
-        
+        Storage::fake('avatars');
+        $file = UploadedFile::fake()->image('avatar.png');
         $request = [
-            'name' => 'Thuy',
-            'infomation' => 'Thuy',
-            'phone' => '0984287637',
+            'name' => 'Demo Test',
+            'infomation' => 'Info Test',
+            'phone' => '098428763722',
             'date_of_birth' => '1995-10-22',
             'position' => 'junior',
+            'avatar' => $file
         ];
-        $response = $this->json('POST', '/ajax/updateMember/' . $member->id, $request);
-        $response
-            ->assertStatus(201)
-            ->assertJson([
-                'errors' => false
-            ]);
+        $response = $this->json('POST', '/ajax/updateMember/1', $request);
+        $request['avatar'] = $file->hashName();
         $this->assertDatabaseHas('tbl_members', $request);
     }
 
     public function testDeleteMember()
     {
-        // test delete member
-        $member = factory(TblMember::class)->create([
-            'name' => 'Thuyhai22',
-            'infomation' => 'infomation 01',
-            'phone' => '0987654321',
-            'date_of_birth' => '1995-10-22',
-            'position' => 'junior'
-        ]);
-        $response = $this->call('delete', 'ajax/member/'.$member->id);
+        $response = $this->call('delete', 'ajax/member/1');
         $response
             ->assertStatus(200)
             ->assertJson([
                 'errors' => false
             ]);
         $this->assertDatabaseMissing('tbl_members', [
-            'name' => 'Thuyhai22',
-            'infomation' => 'infomation 01',
-            'phone' => '0987654321',
-            'date_of_birth' => '1995-10-22',
+            'name' => 'Thuy',
+            'infomation' => 'Infomation Thuy',
+            'phone' => '0984287637',
+            'date_of_birth' => '22-10-1995',
             'position' => 'junior'
         ]);
     }

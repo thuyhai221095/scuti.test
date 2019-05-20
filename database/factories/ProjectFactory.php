@@ -8,8 +8,8 @@ $factory->define(TblProject::class, function (Faker $faker) {
     return [
         'name' => $faker->word,
         'infomation' => str_random(20),
-        'type' =>  $faker->name,
-        'status' => $faker->name,
+        'type' =>  'lab',
+        'status' => 'done',
         'deadline' => date('Y-m-d')
     ];
 });

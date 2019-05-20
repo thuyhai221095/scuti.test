@@ -7,46 +7,55 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Models\TblUserRole;
+use App\Models\TblMember;
+use App\Models\TblProject;
 
 class UserRoleTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseTransactions;
     use WithoutMiddleware;
     /**
      * A basic test example.
      *
      * @return void
      */
-    public function testExample()
-    {
-        $this->assertTrue(true);
-    }
 
     public function testAddUserRoleSuccess()
     {
-        // test add user role
         $request = [
-            'project_id' => 1,
-            'member_id' => 1,
+            'project_id' => 3,
+            'member_id' => 3,
             'role' => 'DEV',
         ];
-        $response = $this->json('POST', 'ajax/user_role', $request);
-        $response
-            ->assertStatus(201)
-            ->assertJson([
-                'errors' => false
-            ]);
+        $response = $this->call('POST', 'ajax/user_role', $request);
         $this->assertDatabaseHas('tbl_user_roles', $request);
     }
 
     public function testUpdateUserRoleSuccess()
     {
-        $userRole = factory(TblUserRole::Class)->create();
+        $request = [
+            'role' => 'PM',
+        ];
+        $response = $this->call('PUT', 'ajax/user_role/1', $request);
+        
+        $this->assertDatabaseHas('tbl_user_roles', $request);
     }
 
     public function testDeleteUserRoleSuccess()
     {
-        //
+        $request = [
+            'project_id' => 1,
+            'member_id' => 1,
+            'role' => 'DEV',
+        ];
+        $response = $this->call('delete', 'ajax/user_role/1');
+        $response
+            ->assertStatus(200)
+            ->assertJson([
+                'errors' => false
+            ]);
+        $this->assertDatabaseMissing('tbl_user_roles', $request);
     }
 }

@@ -20,7 +20,10 @@ class MemberController extends Controller
 
     public function getAvatar($filename)
     {
-        return response()->file(storage_path('app/public/'.$filename));
+        $path = storage_path('app/public/').$filename;
+        if(!File::exists($path)) 
+            $path = storage_path('app/public/') . 'default.png';
+        return response()->file($path);
     }
     /**
      * Show the form for creating a new resource.

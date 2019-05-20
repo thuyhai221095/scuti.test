@@ -5,8 +5,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-
-
 <link rel="stylesheet" href="{{url('bower_components/air-datepicker/dist/css/datepicker.min.css')}}">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -16,8 +14,6 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet">
 <link rel="stylesheet" href="{{url('css/datatable.css')}}">
 
-<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
-
-
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css?t=').time() }}">
 
 @stack("css")

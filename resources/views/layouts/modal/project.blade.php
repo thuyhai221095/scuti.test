@@ -1,5 +1,5 @@
 <!-- Modal project-->
-<div id="project" class="modal fade" role="dialog">
+<div id="project_data" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">

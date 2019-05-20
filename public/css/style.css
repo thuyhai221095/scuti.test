@@ -31,6 +31,9 @@
 .jarviswidget>header>h2{
     font-size: 15px!important;
 }
+.datepicker {
+    z-index: 9999;
+}
 .well{
     background-color: #fbfbfb;
     border: 1px solid #ddd;

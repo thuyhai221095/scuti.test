@@ -18,9 +18,100 @@ class ProjectTest extends TestCase
      *
      * @return void
      */
+    // Test Failed
+    public function testAddProjectNameEmpty()
+    {
+        $request = [
+            'name' => '',
+            'infomation' => 'AE project infomation',
+            'type' => 'lab',
+            'status' => 'planned',
+            'deadline' => '2019-06-01',
+        ];
+        $response = $this->call('POST', 'ajax/project', $request);
+        $this->assertDatabaseMissing('tbl_projects', $request);
+    }
+
+    public function testAddProjectName10Character()
+    {
+        $request = [
+            'name' => str_random(11),
+            'infomation' => 'infomation',
+            'type' => 'lab',
+            'status' => 'planned',
+            'deadline' => '2019-06-01',
+        ];
+        $response = $this->call('POST', 'ajax/project', $request);
+        $this->assertDatabaseMissing('tbl_projects', $request);
+    }
+
+    public function testAddProjectCanAlsoContain()
+    {
+        $request = [
+            'name' => 'AC&AB',
+            'infomation' => 'infomation',
+            'type' => 'lab',
+            'status' => 'planned',
+            'deadline' => '2019-06-01',
+        ];
+        $response = $this->call('POST', 'ajax/project', $request);
+        $this->assertDatabaseMissing('tbl_projects', $request);
+    }
+
+    public function testAddProjectInfomation300Character()
+    {
+        $request = [
+            'name' => 'name',
+            'infomation' => str_random(301),
+            'type' => 'lab',
+            'status' => 'planned',
+            'deadline' => '2019-06-01',
+        ];
+        $response = $this->call('POST', 'ajax/project', $request);
+        $this->assertDatabaseMissing('tbl_projects', $request);
+    }
+
+    public function testAddProjectDeadlineValidDate()
+    {
+        $request = [
+            'name' => 'name',
+            'infomation' => 'infomation',
+            'type' => 'lab',
+            'status' => 'planned',
+            'deadline' => '2019-06-010',
+        ];
+        $response = $this->call('POST', 'ajax/project', $request);
+        $this->assertDatabaseMissing('tbl_projects', $request);
+    }
+
+    public function testAddProjectTypeEmpty()
+    {
+        $request = [
+            'name' => 'name',
+            'infomation' => 'infomation',
+            'type' => '',
+            'status' => 'planned',
+            'deadline' => '2019-06-01',
+        ];
+        $response = $this->call('POST', 'ajax/project', $request);
+        $this->assertDatabaseMissing('tbl_projects', $request);
+    }
+
+    public function testAddProjectStatusEmpty()
+    {
+        $request = [
+            'name' => 'name',
+            'infomation' => 'infomation',
+            'type' => 'lab',
+            'status' => '',
+            'deadline' => '2019-06-01',
+        ];
+        $response = $this->call('POST', 'ajax/project', $request);
+        $this->assertDatabaseMissing('tbl_projects', $request);
+    }
+    // Test Success
     public function testCreateProjectSuccess()
     {
-        // Test create project
         $request = [
             'name' => 'AE',
             'infomation' => 'AE project infomation',
@@ -37,7 +128,7 @@ class ProjectTest extends TestCase
         $this->assertDatabaseHas('tbl_projects', $request);
     }
 
-    public function testUpdateProjectSuccess() 
+    public function testUpdateProjectSuccess()
     {
         $project = factory(TblProject::class)->create();
         $request = [

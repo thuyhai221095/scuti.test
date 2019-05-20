@@ -31,13 +31,13 @@ class UserRoleTest extends TestCase
             'member_id' => 1,
             'role' => 'DEV',
         ];
-        $response = $this->json('POST', 'ajax/project', $request);
+        $response = $this->json('POST', 'ajax/user_role', $request);
         $response
             ->assertStatus(201)
             ->assertJson([
                 'errors' => false
             ]);
-        $this->assertDatabaseHas('tbl_projects', $request);
+        $this->assertDatabaseHas('tbl_user_roles', $request);
     }
 
     public function testUpdateUserRoleSuccess()
@@ -47,6 +47,6 @@ class UserRoleTest extends TestCase
 
     public function testDeleteUserRoleSuccess()
     {
-
+        //
     }
 }

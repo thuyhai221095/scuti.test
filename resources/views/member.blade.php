@@ -25,7 +25,7 @@
 			<article class="col-lg-12">
 				@box_open('Member List')
 					<div>
-						<div class="widget-body no-padding">
+						<div class="widget-body no-padding table-responsive">
 							<?php
 							$columns = [
 								[

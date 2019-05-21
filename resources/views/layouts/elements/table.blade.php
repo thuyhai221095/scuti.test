@@ -9,7 +9,7 @@
 		}
 	}
 ?>
-<table id="{{ $special_id }}" class="table table-striped table-bordered" width="100%" style="margin-top: 0px !important;">
+<table id="{{ $special_id }}" class="table table-striped table-bordered nowrap" width="100%" style="margin-top: 0px !important;">
     <thead>
 		<tr>
         	@foreach ($columns as $column)

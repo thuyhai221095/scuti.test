@@ -31,7 +31,7 @@ class MemberController extends Controller
             return date('d-m-Y', strtotime($u->date_of_birth));
         })
         ->addColumn('action', function ($u) {
-            $action = [];  
+            $action = [];
             $action[] = '
                 <a id="' . $u->id . '" 
                     title="Update member" 

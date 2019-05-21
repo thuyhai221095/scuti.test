@@ -7,7 +7,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 
-class ProjectRequest extends FormRequest
+class UserRoleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,21 +28,14 @@ class ProjectRequest extends FormRequest
     {
         switch ($this->method()) {
             case 'POST':
-                return array(
-                    'name' => 'required|max:10|regex:/^([A-Za-z0-9\s\-\.\(\)]*)$/|unique:tbl_projects,name',
-                    'infomation' => 'max:300',
-                    'deadline' => 'date|after_or_equal:'.date("Y-m-d"),
-                    'type' => 'required',
-                    'status' => 'required'
-                );
+                return [
+                    'project_id' => 'required',
+                    'member_id' => 'required',
+                    'role' => 'required'
+                ];
             case 'PUT':
-                $id = $this->segment(3);
                 return array(
-                    'name' => 'required|max:10|regex:/^([A-Za-z0-9\s\-\.\(\)]*)$/|unique:tbl_projects,name,'.$id,
-                    'infomation' => 'max:300',
-                    'deadline' => 'date',
-                    'type' => 'required',
-                    'status' => 'required'
+                    'role' => 'required'
                 );
             default:
                 return [];

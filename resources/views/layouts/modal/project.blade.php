@@ -43,7 +43,7 @@
                     <div class="form-group" ng-class="{'has-error' : errors.type[0] }" >
                         <label for="type" class="col-sm-2 control-label">Type</label>
                         <div class="col-sm-10">
-                            <select name="method_payment" id="type"  class="form-control" ng-model="project.type">
+                            <select name="type" id="type"  class="form-control" ng-model="project.type">
                                 <option value="">Please choose type</option>
                                 <option value="lab">lab</option>
                                 <option value="single">single</option>
@@ -56,7 +56,7 @@
                     <div class="form-group" ng-class="{'has-error' : errors.status[0] }" >
                         <label for="status" class="col-sm-2 control-label">Status</label>
                         <div class="col-sm-10">
-                            <select name="method_payment" id="status"  class="form-control" ng-model="project.status">
+                            <select name="status" id="status"  class="form-control" ng-model="project.status">
                                 <option value="">Please choose status</option>
                                 <option value="planned">planned</option>
                                 <option value="onhold">onhold</option>
@@ -86,14 +86,14 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" name="pointForm" >
-                    <div class="form-group" ng-class="{'has-error' : errors.member[0] }" >
+                    <div class="form-group" ng-class="{'has-error' : errors.member_id[0] }" >
                         <label for="member" class="col-sm-2 control-label">Member</label>
                         <div class="col-sm-10">
-                            <select name="method_payment" id="member"  class="form-control" ng-model="addRole.member">
+                            <select name="member" id="member"  class="form-control" ng-model="addRole.member">
                                 <option value="">Please choose member</option>
                                 <option ng-repeat="item in listmember" value="@{{item.id}}">@{{item.name}}</option>
                             </select>
-                            <span class="help-block" style="color: #b94a48;" ng-show="errors.member[0]" ng-bind="errors.member[0].toString()"></span>
+                            <span class="help-block" style="color: #b94a48;" ng-show="errors.member_id[0]" ng-bind="errors.member_id[0].toString()"></span>
                         </div>
                     </div>
 

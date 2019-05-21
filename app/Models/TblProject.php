@@ -42,7 +42,7 @@ class TblProject extends Model
     {
         if (isset($request->{$key_in_request}) && !empty($request->{$key_in_request})) {
             $data_request = $request->{$key_in_request};
-            $query = $query->where($key_in_db, 'LIKE',  '%'.$data_request.'%');
+            $query = $query->where($key_in_db, 'LIKE', '%'.$data_request.'%');
         }
         return $query;
     }

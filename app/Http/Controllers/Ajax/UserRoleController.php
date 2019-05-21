@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Ajax;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Input;
 use App\Models\TblUserRole;
 use App\Models\TblMember;
-use Validator;
+use App\Http\Requests\UserRoleRequest;
 use Response;
 use DB;
 
@@ -40,33 +39,16 @@ class UserRoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRoleRequest $request)
     {
         DB::beginTransaction();
         try {
-            $rules = array(
-                'project_id' => 'required',
-                'member_id' => 'required',
-                'role' => 'required'
-            );
-            $msg = [];
-            $validator = Validator::make(Input::all(), $rules, $msg);
-            if ($validator->fails()) {
-                return Response::json(array(
-                    'errors' => $validator->getMessageBag()->toArray()
-                ));
-            } else {
-                $data = new TblUserRole();
-                $data->project_id = $request->project_id;
-                $data->member_id = $request->member_id;
-                $data->role = $request->role;
-                $data->save();
-                DB::commit();
-                return Response::json([
-                    'errors' => false,
-                    'msg' => 'Add new successfully'
-                ], 201);
-            }
+            $user_role = TblUserRole::create($request->all());
+            DB::commit();
+            return Response::json([
+                'errors' => false,
+                'msg' => 'Add new successfully'
+            ], 201);
         } catch (Exception $e) {
             DB::rollBack();
         }
@@ -103,31 +85,19 @@ class UserRoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRoleRequest $request, $id)
     {
         DB::beginTransaction();
         try {
-            $rules = array(
-                'role' => 'required'
-            );
-            $msg = [];
-            $validator = Validator::make(Input::all(), $rules, $msg);
-            if ($validator->fails()) {
-                return Response::json(array(
-                    'errors' => $validator->getMessageBag()->toArray()
-                ));
-            } else {
-                $data = TblUserRole::find($id);
-                $data->role = $request->role;
-                $data->update();
-                $detail_new = TblUserRole::with('member')->where('project_id', $data->project_id)->get();
-                DB::commit();
-                return Response::json([
-                    'errors' => false,
-                    'data'  => $detail_new,
-                    'msg' => 'Update successfully'
-                ], 201);
-            }
+            $user_role = TblUserRole::find($id);
+            $user_role->update($request->all());
+            DB::commit();
+            $detail_new = TblUserRole::with('member')->where('project_id', $user_role->project_id)->get();
+            return Response::json([
+                'errors' => false,
+                'data'  => $detail_new,
+                'msg' => 'Update successfully'
+            ], 201);
         } catch (Exception $e) {
             DB::rollBack();
         }

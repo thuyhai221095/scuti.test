@@ -17,7 +17,7 @@
 <script type="text/javascript">
 	
 	var myApp = angular.module("myApp", []);
-	
+	myApp.controller("myController", function ($scope, $http, $compile) {});
 	// date-picker
 	myApp.directive('datePicker', function(){
 		return{

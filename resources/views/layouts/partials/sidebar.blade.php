@@ -6,13 +6,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{{url('/')}}">
             <h1 class="logo">SCUTI TEST</h1>
         </a>
     </div>
     <ul class="nav navbar-right top-nav">
-                   
-       
     </ul>
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">

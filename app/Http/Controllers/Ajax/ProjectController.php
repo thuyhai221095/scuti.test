@@ -30,9 +30,21 @@ class ProjectController extends Controller
         ->editColumn('deadline', function ($u) {
             return date('d-m-Y', strtotime($u->deadline));
         })
-        ->addColumn('contacts', function ($u) {
-            return $u->users->pluck('name')->toArray();
+        ->editColumn('contacts', function ($u) {
+            $user = $u->users;
+            $img = [];
+            foreach($user as $value) {
+                $avatar = 'default.png';
+                if($value->avatar)
+                    $avatar = $value->avatar;
+                $img[] = '<img 
+                    title="'.$value->name.'" 
+                    src="'.url('avatars').'/'.$avatar.'" 
+                    class="avatar"/>'; 
+            }
+            return implode(' ', $img);
         })
+        ->escapeColumns([])
         ->addColumn('action', function ($u) {
             $action[] = '
                 <a 

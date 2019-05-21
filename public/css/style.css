@@ -45,6 +45,11 @@
 .txt-color-blueDark{
     font-size: 30px!important;
 }
+.avatar {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #ccccccbf;
+}
 @media(min-width:768px) {
     #wrapper {
         padding-left: 225px;

@@ -30,6 +30,14 @@ class MemberController extends Controller
         ->editColumn('date_of_birth', function ($u) {
             return date('d-m-Y', strtotime($u->date_of_birth));
         })
+        ->editColumn('avatar', function ($u) {
+            $avatar = 'default.png';
+                if($u->avatar)
+                    $avatar = $u->avatar;
+            $img[] = '<img title="'.$u->name.'" src="'.url('avatars').'/'.$avatar.'" class="avatar"/>'; 
+            return implode(' ', $img);
+        })
+        ->escapeColumns([])
         ->addColumn('action', function ($u) {
             $action = [];
             $action[] = '

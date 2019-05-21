@@ -37,6 +37,14 @@
 									'width' => 120
 								],
 								[
+									"data" => 'avatar',
+									"title" => 'Avatar',
+									'name' => 'avatar',
+									'hasFilter' => false,
+									'orderable'=> false,
+									'width' => 40
+								],
+								[
 									"data" => 'infomation',
 									"title" => 'Infomation',
 									'name' => 'infomation',

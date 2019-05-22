@@ -10,6 +10,7 @@ use App\Models\TblUserRole;
 use Yajra\Datatables\Datatables;
 use Response;
 use DB;
+use PhpParser\Node\Stmt\Label;
 
 class ProjectController extends Controller
 {
@@ -29,6 +30,30 @@ class ProjectController extends Controller
         return Datatables::of($data)
         ->editColumn('deadline', function ($u) {
             return date('d-m-Y', strtotime($u->deadline));
+        })
+        ->editColumn('status', function ($u) {
+            $class = '';
+            switch ($u->status) {
+                case 'planned':
+                    $class = 'label-info';
+                    break;
+                case 'onhold':
+                    $class = 'label-default';
+                    break;
+                case 'doing':
+                    $class = 'label-primary';
+                    break;
+                case 'done':
+                    $class = 'label-success';
+                    break;
+                case 'cancelled':
+                    $class = 'label-danger';
+                    break;
+                default:
+                    $class = '';
+                    break;
+            }
+            return '<Label class="label '.$class.'">'.$u->status.'</Label>';
         })
         ->editColumn('contacts', function ($u) {
             $user = $u->users;

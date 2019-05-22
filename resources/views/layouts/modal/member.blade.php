@@ -48,7 +48,7 @@
                         <label for="date_of_birth" class="col-sm-2 control-label">Data of Birth</label>
                         <div class="col-sm-10">
                             <input type='text' date-picker
-                                placeholder='DD/MM/YYYY' 
+                                placeholder='DD-MM-YYYY' 
                                 maxlength="10" 
                                 ng-required='true'
                                 data-language="en"

@@ -27,7 +27,7 @@
 				@box_open('Project List')
 					<div>
 						<div class="widget-body no-padding table-responsive">
-							<?php
+							@php
 							$columns = [
 								[
 									"data" => 'name',
@@ -85,8 +85,7 @@
 								],
 	
 							];
-	
-							?>
+							@endphp
 							@include("custom.table_data", [
 								"url" =>  url('ajax/project'),
 								"table_id" => 'table_project',

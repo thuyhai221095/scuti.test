@@ -26,7 +26,7 @@
 				@box_open('Member List')
 					<div>
 						<div class="widget-body no-padding table-responsive">
-							<?php
+							@php
 							$columns = [
 								[
 									"data" => 'name',
@@ -81,8 +81,7 @@
 								],
 	
 							];
-	
-							?>
+							@endphp
 							@include("custom.table_data", [
 								"url" =>  url('ajax/member'),
 								"table_id" => 'table_member',

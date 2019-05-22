@@ -32,9 +32,10 @@ class MemberController extends Controller
         })
         ->editColumn('avatar', function ($u) {
             $avatar = 'default.png';
-                if($u->avatar)
-                    $avatar = $u->avatar;
-            $img[] = '<img title="'.$u->name.'" src="'.url('avatars').'/'.$avatar.'" class="avatar"/>'; 
+            if ($u->avatar) {
+                $avatar = $u->avatar;
+            }
+            $img[] = '<img title="'.$u->name.'" src="'.url('avatars').'/'.$avatar.'" class="avatar"/>';
             return implode(' ', $img);
         })
         ->escapeColumns([])

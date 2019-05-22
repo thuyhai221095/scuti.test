@@ -67,6 +67,12 @@ class MemberRequest extends FormRequest
         }
     }
 
+    public function messages()
+    {
+        return [
+            'avatar.max' => 'Maximum file size to upload is 10MB (10240 KB). '
+        ];
+    }
     // custom validation faild return
     protected function failedValidation(Validator $validator)
     {

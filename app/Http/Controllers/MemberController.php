@@ -21,7 +21,7 @@ class MemberController extends Controller
     public function getAvatar($filename)
     {
         $path = storage_path('app/public/').$filename;
-        if(!File::exists($path)) {
+        if (!File::exists($path)) {
             $path = storage_path('app/public/') . 'default.png';
         }
         return response()->file($path);

@@ -41,6 +41,13 @@ class UserRoleRequest extends FormRequest
                 return [];
         }
     }
+
+    public function messages()
+    {
+        return [
+            'member_id.max' => 'The member field is required.'
+        ];
+    }
     // custom validation faild return
     protected function failedValidation(Validator $validator)
     {

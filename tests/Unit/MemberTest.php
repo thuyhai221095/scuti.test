@@ -12,7 +12,6 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Models\TblMember;
 
-
 class MemberTest extends TestCase
 {
     use DatabaseTransactions;

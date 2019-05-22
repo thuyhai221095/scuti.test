@@ -17,24 +17,21 @@ class UserRole extends Seeder
                 'project_id' => 1,
                 'member_id' => 1,
                 'role' => 'DEV',
-                
             ],
             [
                 'project_id' => 1,
                 'member_id' => 2,
                 'role' => 'DEV',
-                
             ],
             [
                 'project_id' => 1,
                 'member_id' => 3,
                 'role' => 'DEV',
-                
             ],
             [
                 'project_id' => 2,
                 'member_id' => 3,
-                'role' => 'DEV', 
+                'role' => 'DEV',
             ],
             [
                 'project_id' => 2,

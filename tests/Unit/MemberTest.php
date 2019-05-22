@@ -23,7 +23,10 @@ class MemberTest extends TestCase
      *
      * @return void
      */
-    
+    public function testBasicTest()
+    {
+        $this->assertTrue(true);
+    }
     // Test Failed
     public function testAddMemberNameEmpty()
     {

@@ -99,6 +99,7 @@
 
         $scope.openMember =  function(id) {
             $scope.errors = {};
+            $('#avatar').val('');
             formData = new FormData();
             $http({
                 method: 'GET',

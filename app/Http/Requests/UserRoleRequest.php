@@ -45,7 +45,7 @@ class UserRoleRequest extends FormRequest
     public function messages()
     {
         return [
-            'member_id.max' => 'The member field is required.'
+            'member_id.required' => 'The member field is required.'
         ];
     }
     // custom validation faild return

@@ -31,7 +31,7 @@
 		        // Format date on load
 		        ctrl.$formatters.unshift(function(value) {
 		        	if(value && moment(value).isValid()){
-		        		return moment(new Date(value)).format('MM/DD/YYYY');
+		        		return moment(new Date(value)).format('DD-MM-YYYY');
 		        	}
 		        	return value;
 		        })
@@ -49,7 +49,7 @@
 		        	autoSize: true,
 		        	changeYear: true,
 		        	changeMonth: true,
-		        	dateFormat: attr["dateformat"] || 'mm/dd/yy',
+		        	dateFormat: attr["dateformat"] || 'dd-mm-yy',
 		        	showOn: 'button',
 		        	buttonText: '<i class="glyphicon glyphicon-calendar"></i>',
 		        	onSelect: function (valu) {

@@ -53,12 +53,26 @@ class MemberRequest extends FormRequest
                 );
                 
             case 'updateMember':
-                $id = $this->segment(3);
                 return array(
-                    'name' => 'required|max:50|regex:/^([A-Za-z0-9\s\-\.\(\)]*)$/|unique:tbl_members,name,'.$id,
+                    'name' => [
+                        'required',
+                        'max:50',
+                        'regex:/^([A-Za-z0-9\s\-\.\(\)]*)$/',
+                        'unique:tbl_members,name,'. $this->segment(3)
+                    ],
                     'infomation' => 'max:300',
-                    'date_of_birth' => 'required|date|before:now|after:-60 years',
-                    'phone' => 'required|regex:/^([0-9\s\-\+\.\(\)]*)$/|max:20|unique:tbl_members,phone,'.$id,
+                    'date_of_birth' => [
+                        'required',
+                        'date',
+                        'before_or_equal:now',
+                        'after:-60 years'
+                    ],
+                    'phone' => [
+                        'required',
+                        'regex:/^([0-9\s\-\+\.\(\)]*)$/',
+                        'max:20',
+                        'unique:tbl_members,phone,'. $this->segment(3)
+                    ],
                     'avatar' => 'image|mimes:jpeg,png,jpg|max:10240',
                     'position' => 'required'
                 );

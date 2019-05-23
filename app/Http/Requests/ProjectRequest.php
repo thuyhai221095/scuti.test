@@ -29,18 +29,27 @@ class ProjectRequest extends FormRequest
         switch ($this->method()) {
             case 'POST':
                 return array(
-                    'name' => 'required|max:10|regex:/^([A-Za-z0-9\s\-\.\(\)]*)$/|unique:tbl_projects,name',
+                    'name' => [
+                        'required',
+                        'max:10',
+                        'regex:/^([A-Za-z0-9\s\-\.\(\)]*)$/',
+                        'unique:tbl_projects,name'
+                    ],
                     'infomation' => 'max:300',
                     'deadline' => 'date|after_or_equal:'.date("Y-m-d"),
                     'type' => 'required',
                     'status' => 'required'
                 );
             case 'PUT':
-                $id = $this->segment(3);
                 return array(
-                    'name' => 'required|max:10|regex:/^([A-Za-z0-9\s\-\.\(\)]*)$/|unique:tbl_projects,name,'.$id,
+                    'name' => [
+                        'required',
+                        'max:10',
+                        'regex:/^([A-Za-z0-9\s\-\.\(\)]*)$/',
+                        'unique:tbl_projects,name,'. $this->segment(3)
+                    ],
                     'infomation' => 'max:300',
-                    'deadline' => 'date',
+                    'deadline' => 'date|after_or_equal:'.date("Y-m-d"),
                     'type' => 'required',
                     'status' => 'required'
                 );

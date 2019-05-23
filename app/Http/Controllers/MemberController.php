@@ -18,9 +18,9 @@ class MemberController extends Controller
         return view('member');
     }
 
-    public function getAvatar($filename)
+    public function getAvatar($name)
     {
-        $path = storage_path('app/public/').$filename;
+        $path = storage_path('app/public/').$name;
         if (!File::exists($path)) {
             $path = storage_path('app/public/') . 'default.png';
         }

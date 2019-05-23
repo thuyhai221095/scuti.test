@@ -54,7 +54,8 @@
                                 data-language="en"
                                 data-date-format="dd-mm-yyyy"
                                 class="datepicker-here form-control"
-                                ng-model='member.date_of_birth'>
+                                ng-model='member.date_of_birth'
+                                data-position="right top">
                             <span class="help-block" style="color: #b94a48;" ng-show="errors.date_of_birth[0]" ng-bind="errors.date_of_birth[0].toString()"></span>
                         </div>
                     </div>

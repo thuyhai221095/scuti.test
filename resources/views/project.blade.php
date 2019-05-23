@@ -50,7 +50,7 @@
 									'name' => 'contacts',
 									'hasFilter' => false,
 									'orderable'=> false,
-									'width' => 150
+									'width' => 155
 								],
 								[
 									"data" => 'type',

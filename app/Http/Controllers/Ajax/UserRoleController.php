@@ -63,7 +63,7 @@ class UserRoleController extends Controller
     public function show($id)
     {
         $users = TblUserRole::where('project_id', $id)->pluck('member_id')->toArray();
-        $data = TblMember::whereNotIn('id', $users)->get();
+        $data = TblMember::select('id', 'name')->whereNotIn('id', $users)->get();
         return $data;
     }
 

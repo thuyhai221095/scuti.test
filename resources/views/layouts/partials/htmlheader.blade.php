@@ -16,6 +16,8 @@
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet">
 
+<link rel="stylesheet" href="{{ asset('/css/jquery.mloading.css') }}">
+
 <link rel="stylesheet" href="{{url('css/datatable.css')}}">
 
 <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css?t=').time() }}">

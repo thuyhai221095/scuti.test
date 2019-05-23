@@ -16,13 +16,13 @@ class TblMember extends Model
     public static function getPosition()
     {
         return [
-            ['name' => 'intern', 'value' => 'intern'],
-            ['name' => 'junior','value' => 'junior'],
-            ['name' => 'senior','value' => 'senior'],
-            ['name' => 'pm','value' => 'pm'],
-            ['name' => 'ceo','value' => 'ceo'],
-            ['name' => 'cto','value' => 'cto'],
-            ['name' => 'bo','value' => 'bo'],
+            ['name' => 'Intern', 'value' => 'intern'],
+            ['name' => 'Junior','value' => 'junior'],
+            ['name' => 'Senior','value' => 'senior'],
+            ['name' => 'PM','value' => 'pm'],
+            ['name' => 'CEO','value' => 'ceo'],
+            ['name' => 'CTO','value' => 'cto'],
+            ['name' => 'BO','value' => 'bo'],
             
         ];
     }

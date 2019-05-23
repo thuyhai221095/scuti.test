@@ -11,6 +11,8 @@
 <script src="{{ asset('js/datatable-responsive/datatables.responsive.min.js') }}"></script>
 <script src="{{ asset('bower_components/air-datepicker/dist/js/datepicker.min.js') }}"></script>
 <script src="{{ asset('bower_components/air-datepicker/dist/js/i18n/datepicker.en.js') }}"></script>
+<script src="{{ asset('js/main.js') }}"></script>
+<script src="{{ asset('js/jquery.mloading.js') }}"></script>
 <!-- toastr -->
 <script src="{{ url('js/toastr.min.js') }}"></script>
 @stack("script")

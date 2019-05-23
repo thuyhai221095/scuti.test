@@ -16,6 +16,7 @@
         /*start member*/
         
         $scope.addMember =function() {
+            showLoading();
             if ($scope.member.name != undefined) {
                 formData.set('name', $scope.member.name);
             }
@@ -50,13 +51,14 @@
                     $scope.member = {};
                     toastr.success(response.data.msg);
                 }
+                hideLoading();
             }, function error(e) {
                console.log('err')
             });
         }
 
         $scope.updateMember =function() {
-
+            showLoading();
             if ($scope.member.name != undefined) {
                 formData.set('name', $scope.member.name);
             }
@@ -92,6 +94,7 @@
                         toastr.success(response.data.msg);
                         $scope.member = {};
                     }
+                    hideLoading();
                 }, function error(e) {
                    console.log('err')
                 });

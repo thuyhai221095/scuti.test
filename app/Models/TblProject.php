@@ -21,20 +21,20 @@ class TblProject extends Model
     public static function getStatus()
     {
         return [
-            ['name' => 'planned', 'value' => 'planned'],
-            ['name' => 'onhold', 'value' => 'onhold'],
-            ['name' => 'doing', 'value' => 'doing'],
-            ['name' => 'done', 'value' => 'done'],
-            ['name' => 'cancelled', 'value' => 'cancelled'],
+            ['name' => 'Planned', 'value' => 'planned'],
+            ['name' => 'Onhold', 'value' => 'onhold'],
+            ['name' => 'Doing', 'value' => 'doing'],
+            ['name' => 'Done', 'value' => 'done'],
+            ['name' => 'Cancelled', 'value' => 'cancelled'],
         ];
     }
     
     public static function getType()
     {
         return [
-            ['name' => 'lab', 'value' => 'lab'],
-            ['name' => 'single', 'value' => 'single'],
-            ['name' => 'acceptance', 'value' => 'acceptance']
+            ['name' => 'Lab', 'value' => 'lab'],
+            ['name' => 'Single', 'value' => 'single'],
+            ['name' => 'Acceptance', 'value' => 'acceptance']
         ];
     }
     

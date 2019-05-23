@@ -71,18 +71,32 @@
 		}
 
 		$scope.deleteProject =  function(id) {
-			var result = confirm('Are you sure ?');
-            if (result) {
-            	$http({
-					method: 'DELETE',
-					url: '{{ url('ajax/project/') }}' + '/' + id,
-				}).then(function (response) {
-					$('#table_project').DataTable().ajax.reload();
-					toastr.success(response.data.msg);
-				}, function (xhr) {
-					console.log('error');
-				});
-            }
+			Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                if (result.value) {
+                    // action
+                    $http({
+						method: 'DELETE',
+						url: '{{ url('ajax/project/') }}' + '/' + id,
+					}).then(function (response) {
+						$('#table_project').DataTable().ajax.reload();
+						Swal.fire(
+                            'Deleted!',
+                            response.data.msg,
+                            'success'
+                        )
+					}, function (xhr) {
+						console.log('error');
+					});
+                }
+                })
 		}
 
 		$scope.openProject =  function(id) {
@@ -189,24 +203,38 @@
 		}
 
 		$scope.deleteUserRole =  function(id) {
-			var result = confirm('Are you sure ??');
-            if (result) {
-				$http({
-					method: 'DELETE',
-					url: '{{ url('ajax/user_role') }}' + '/' + id
-				}).then(function (response) {
-					if (response.data.errors) {
-	                    $scope.errors = response.data.errors;
-	                    toastr.error('Error');
-	                } else {
-	                	$('#table_project').DataTable().ajax.reload();
-	                	$scope.listMemberOfProject = response.data.data;
-	                	toastr.success(response.data.msg);
-					}
-				}, function (xhr) {
-					console.log('error');
-				});
-			}
+			Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                if (result.value) {
+                    // action
+                    $http({
+						method: 'DELETE',
+						url: '{{ url('ajax/user_role') }}' + '/' + id
+					}).then(function (response) {
+						if (response.data.errors) {
+							$scope.errors = response.data.errors;
+							toastr.error('Error');
+						} else {
+							$('#table_project').DataTable().ajax.reload();
+							$scope.listMemberOfProject = response.data.data;
+							Swal.fire(
+								'Deleted!',
+								response.data.msg,
+								'success'
+							)
+						}
+					}, function (xhr) {
+						console.log('error');
+					});
+                }
+                })
 		}
         /*end project*/
 	});

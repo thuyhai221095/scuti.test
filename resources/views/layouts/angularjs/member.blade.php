@@ -117,18 +117,32 @@
         }
 
         $scope.deleteMember =  function(id) {
-            var result = confirm('Are you sure');
-            if (result) {
-                $http({
-                    method: 'DELETE',
-                    url: '{{ url('ajax/member/') }}' + '/' + id,
-                }).then(function (response) {
-                    $('#table_member').DataTable().ajax.reload();
-                    toastr.success(response.data.msg);
-                }, function (xhr) {
-                    console.log('error');
-                });
-            }
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                if (result.value) {
+                    // action
+                    $http({
+                        method: 'DELETE',
+                        url: '{{ url('ajax/member/') }}' + '/' + id,
+                    }).then(function (response) {
+                        $('#table_member').DataTable().ajax.reload();
+                        Swal.fire(
+                            'Deleted!',
+                            response.data.msg,
+                            'success'
+                        )
+                    }, function (xhr) {
+                        console.log('error');
+                    });
+                }
+                })
         }
         
         $scope.actionMember = function () {

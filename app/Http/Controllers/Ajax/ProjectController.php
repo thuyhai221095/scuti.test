@@ -21,7 +21,7 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
-        $data = TblProject::with('users');
+        $data = TblProject::with('users')->orderBy('created_at', 'DESC');
         $data = TblProject::filterInput($data, 'name', 'name', $request);
         $data = TblProject::filterInput($data, 'type', 'type', $request);
         $data = TblProject::filterInput($data, 'status', 'status', $request);

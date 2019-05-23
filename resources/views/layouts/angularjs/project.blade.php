@@ -15,6 +15,7 @@
 
         /*start project*/
         $scope.addProject =function() {
+			showLoading();
 			$http({
 				method: 'POST',
 				url: '{{ url('ajax/project') }}',
@@ -35,12 +36,14 @@
                 	$scope.project = {};
                 	toastr.success(response.data.msg);
 				}
+            	hideLoading();
 			}, function (xhr) {
 				console.log('error');
 			});
 		} 
 
 		$scope.updateProject  = function(id) {
+			showLoading();
 			$http({
 				method: 'PUT',
 				url: '{{ url('ajax/project') }}'+ '/' + id,
@@ -61,6 +64,7 @@
                 	$scope.project = {};
                 	toastr.success(response.data.msg);
 				}
+            	hideLoading();
 			}, function (xhr) {
 				console.log('error');
 			});
@@ -94,8 +98,6 @@
 				console.log('error');
 			});
 		}
-
-		
 
 		$scope.detailProject =  function(id) {
 			$http({

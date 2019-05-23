@@ -64,13 +64,13 @@
                         <div class="col-sm-10">
                             <select name="method_payment" id="position"  class="form-control" ng-model="member.position">
                                 <option value="">Please choose positon</option>
-                                <option value="intern">intern</option>
-                                <option value="junior">junior</option>
-                                <option value="senior">senior</option>
-                                <option value="pm">pm</option>
-                                <option value="ceo">ceo</option>
-                                <option value="cto">cto</option>
-                                <option value="bo">bo</option>
+                                <option value="intern">Intern</option>
+                                <option value="junior">Junior</option>
+                                <option value="senior">Senior</option>
+                                <option value="pm">PM</option>
+                                <option value="ceo">CEO</option>
+                                <option value="cto">CTO</option>
+                                <option value="bo">BO</option>
                             </select>
                             <span class="help-block" style="color: #b94a48;" ng-show="errors.position[0]" ng-bind="errors.position[0].toString()"></span>
                         </div>

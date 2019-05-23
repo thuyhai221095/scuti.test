@@ -45,9 +45,9 @@
                         <div class="col-sm-10">
                             <select name="type" id="type"  class="form-control" ng-model="project.type">
                                 <option value="">Please choose type</option>
-                                <option value="lab">lab</option>
-                                <option value="single">single</option>
-                                <option value="acceptance">acceptance</option>
+                                <option value="lab">Lab</option>
+                                <option value="single">Single</option>
+                                <option value="acceptance">Acceptance</option>
                             </select>
                             <span class="help-block" style="color: #b94a48;" ng-show="errors.type[0]" ng-bind="errors.type[0].toString()"></span>
                         </div>
@@ -58,11 +58,11 @@
                         <div class="col-sm-10">
                             <select name="status" id="status"  class="form-control" ng-model="project.status">
                                 <option value="">Please choose status</option>
-                                <option value="planned">planned</option>
-                                <option value="onhold">onhold</option>
-                                <option value="doing">doing</option>
-                                <option value="done">done</option>
-                                <option value="cancelled">cancelled</option>
+                                <option value="planned">Planned</option>
+                                <option value="onhold">Onhold</option>
+                                <option value="doing">Doing</option>
+                                <option value="done">Done</option>
+                                <option value="cancelled">Cancelled</option>
                             </select>
                             <span class="help-block" style="color: #b94a48;" ng-show="errors.status[0]" ng-bind="errors.status[0].toString()"></span>
                         </div>

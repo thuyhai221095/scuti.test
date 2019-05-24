@@ -49,7 +49,7 @@ class ProjectRequest extends FormRequest
                         'unique:tbl_projects,name,'. $this->segment(3)
                     ],
                     'infomation' => 'max:300',
-                    'deadline' => 'date|after_or_equal:'.date("Y-m-d"),
+                    'deadline' => 'date',
                     'type' => 'required',
                     'status' => 'required'
                 );

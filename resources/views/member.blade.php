@@ -68,7 +68,7 @@
 									"data" => 'position',
 									"title" => 'Position',
 									'name' => 'position',
-									'items' => App\Models\TblMember::getPosition(),
+									'items' => App\Models\MstPosition::allToOption(),
 									'filterType' => 'dropdown',
 									'hasFilter' => true,
 								],

@@ -45,9 +45,9 @@
                         <div class="col-sm-10">
                             <select name="type" id="type"  class="form-control" ng-model="project.type">
                                 <option value="">Please choose type</option>
-                                <option value="lab">Lab</option>
-                                <option value="single">Single</option>
-                                <option value="acceptance">Acceptance</option>
+                                @foreach (App\Models\MstType::allToOption() as $item)
+                                    <option value="{{$item['value']}}">{{$item['name']}}</option>
+                                @endforeach
                             </select>
                             <span class="help-block" style="color: #b94a48;" ng-show="errors.type[0]" ng-bind="errors.type[0].toString()"></span>
                         </div>
@@ -58,11 +58,9 @@
                         <div class="col-sm-10">
                             <select name="status" id="status"  class="form-control" ng-model="project.status">
                                 <option value="">Please choose status</option>
-                                <option value="planned">Planned</option>
-                                <option value="onhold">Onhold</option>
-                                <option value="doing">Doing</option>
-                                <option value="done">Done</option>
-                                <option value="cancelled">Cancelled</option>
+                                @foreach (App\Models\MstStatus::allToOption() as $item)
+                                    <option value="{{$item['value']}}">{{$item['name']}}</option>
+                                @endforeach
                             </select>
                             <span class="help-block" style="color: #b94a48;" ng-show="errors.status[0]" ng-bind="errors.status[0].toString()"></span>
                         </div>
@@ -102,11 +100,9 @@
                         <div class="col-sm-10">
                             <select name="method_payment" id="role"  class="form-control" ng-model="addRole.role">
                                 <option value="">Please choose role</option>
-                                <option value="DEV">DEV</option>
-                                <option value="PL">PL</option>
-                                <option value="PM">PM</option>
-                                <option value="PO">PO</option>
-                                <option value="SM">SM</option>
+                                @foreach (App\Models\MstRole::allToOption() as $item)
+                                    <option value="{{$item['value']}}">{{$item['name']}}</option>
+                                @endforeach
                             </select>
                             <span class="help-block" style="color: #b94a48;" ng-show="errors.role[0]" ng-bind="errors.role[0].toString()"></span>
                         </div>
@@ -120,7 +116,6 @@
         </div>
     </div>
 </div>
-
 <!-- Modal detail member of project -->
 <div id="detailProject" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -186,11 +181,9 @@
                         <div class="col-sm-10">
                             <select name="method_payment" id="role"  class="form-control" ng-model="updateRole.role">
                                 <option value="">Please choose role</option>
-                                <option value="DEV">DEV</option>
-                                <option value="PL">PL</option>
-                                <option value="PM">PM</option>
-                                <option value="PO">PO</option>
-                                <option value="SM">SM</option>
+                                @foreach (App\Models\MstRole::allToOption() as $item)
+                                    <option value="{{$item['value']}}">{{$item['name']}}</option>
+                                @endforeach
                             </select>
                             <span class="help-block" style="color: #b94a48;" ng-show="errors.role[0]" ng-bind="errors.role[0].toString()"></span>
                         </div>

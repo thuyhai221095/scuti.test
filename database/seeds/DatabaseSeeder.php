@@ -15,10 +15,10 @@ class DatabaseSeeder extends Seeder
             // MemberSeed::class,
             // ProjectSeed::class,
             // UserRole::class,
-            PositionSeeder::class,
-            StatusSeeder::class,
-            TypeSeeder::class,
-            RoleSeeder::class
+            // PositionSeeder::class,
+            // StatusSeeder::class,
+            // TypeSeeder::class,
+            // RoleSeeder::class
         ]);
     }
 }

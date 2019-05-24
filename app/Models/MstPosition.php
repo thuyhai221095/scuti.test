@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MstPosition extends Model
 {
-    static public function allToOption()
+    public static function allToOption()
     {
         $position = MstPosition::all();
         $array = [];

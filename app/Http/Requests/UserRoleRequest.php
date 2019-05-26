@@ -54,7 +54,9 @@ class UserRoleRequest extends FormRequest
         $errors = (new ValidationException($validator))->errors();
         throw new HttpResponseException(response()->json(
             [
-                'errors' => $errors
+                'errors' => true,
+                'status' => 422,
+                'msg' => $errors
             ]
         ), 422);
     }

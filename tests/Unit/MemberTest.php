@@ -150,7 +150,7 @@ class MemberTest extends TestCase
             'name' => 'Demo Test',
             'infomation' => 'Info Test',
             'phone' => '098428761921',
-            'date_of_birth' => '2019-05-21',
+            'date_of_birth' => '1099-10-21',
             'position' => 'junior',
         ];
         $response = $this->call('POST', 'ajax/member', $request);

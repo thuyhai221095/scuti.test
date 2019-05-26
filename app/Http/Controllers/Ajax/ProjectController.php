@@ -108,6 +108,7 @@ class ProjectController extends Controller
                 </a>';
             return implode(' ', $action);
         })
+        ->escapeColumns(['infomation', 'name', 'action', 'deadline', 'type'])
         ->make(true);
     }
     /**

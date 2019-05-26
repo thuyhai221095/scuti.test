@@ -18,26 +18,6 @@ class TblProject extends Model
         return $this->hasMany('App\Models\TblUserRole', 'project_id');
     }
 
-    public static function getStatus()
-    {
-        return [
-            ['name' => 'Planned', 'value' => 'planned'],
-            ['name' => 'Onhold', 'value' => 'onhold'],
-            ['name' => 'Doing', 'value' => 'doing'],
-            ['name' => 'Done', 'value' => 'done'],
-            ['name' => 'Cancelled', 'value' => 'cancelled'],
-        ];
-    }
-    
-    public static function getType()
-    {
-        return [
-            ['name' => 'Lab', 'value' => 'lab'],
-            ['name' => 'Single', 'value' => 'single'],
-            ['name' => 'Acceptance', 'value' => 'acceptance']
-        ];
-    }
-    
     public static function filterInput($query, $key_in_request, $key_in_db, $request)
     {
         if (isset($request->{$key_in_request}) && !empty($request->{$key_in_request})) {

@@ -38,7 +38,6 @@ class MemberController extends Controller
             $img[] = '<img title="'.$u->name.'" src="'.url('avatars').'/'.$avatar.'" class="avatar"/>';
             return implode(' ', $img);
         })
-        ->escapeColumns([])
         ->addColumn('action', function ($u) {
             $action = [];
             $action[] = '
@@ -59,6 +58,7 @@ class MemberController extends Controller
                 </a>';
             return implode(' ', $action);
         })
+        ->escapeColumns(['infomation', 'name', 'action', 'phone', 'date_of_birth', 'position'])
         ->make(true);
         return Datatables::of(TblMember::query())->make(true);
     }

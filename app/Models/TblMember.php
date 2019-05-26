@@ -13,20 +13,6 @@ class TblMember extends Model
         return $this->hasMany('App\Models\TblUserRole', 'member_id');
     }
     
-    public static function getPosition()
-    {
-        return [
-            ['name' => 'Intern', 'value' => 'intern'],
-            ['name' => 'Junior','value' => 'junior'],
-            ['name' => 'Senior','value' => 'senior'],
-            ['name' => 'PM','value' => 'pm'],
-            ['name' => 'CEO','value' => 'ceo'],
-            ['name' => 'CTO','value' => 'cto'],
-            ['name' => 'BO','value' => 'bo'],
-            
-        ];
-    }
-
     public static function filterInput($query, $key_in_request, $key_in_db, $request)
     {
         if (isset($request->{$key_in_request}) && !empty($request->{$key_in_request})) {

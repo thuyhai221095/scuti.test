@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-// use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Models\TblMember;
 
 class MemberTest extends TestCase
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations;
     use WithoutMiddleware;
 
     /**
@@ -37,6 +37,11 @@ class MemberTest extends TestCase
             'position' => 'junior',
         ];
         $response = $this->call('POST', 'ajax/member', $request);
+        $response
+            ->assertJson([
+                'errors' => true,
+                'status' => 422
+            ]);
         $this->assertDatabaseMissing('tbl_members', $request);
     }
 
@@ -50,6 +55,11 @@ class MemberTest extends TestCase
             'position' => 'junior',
         ];
         $response = $this->call('POST', 'ajax/member', $request);
+        $response
+            ->assertJson([
+                'errors' => true,
+                'status' => 422
+            ]);
         $this->assertDatabaseMissing('tbl_members', $request);
     }
 
@@ -63,6 +73,11 @@ class MemberTest extends TestCase
             'position' => 'junior',
         ];
         $response = $this->call('POST', 'ajax/member', $request);
+        $response
+            ->assertJson([
+                'errors' => true,
+                'status' => 422
+            ]);
         $this->assertDatabaseMissing('tbl_members', $request);
     }
 
@@ -76,6 +91,11 @@ class MemberTest extends TestCase
             'position' => 'junior',
         ];
         $response = $this->call('POST', 'ajax/member', $request);
+        $response
+            ->assertJson([
+                'errors' => true,
+                'status' => 422
+            ]);
         $this->assertDatabaseMissing('tbl_members', $request);
     }
 
@@ -89,6 +109,11 @@ class MemberTest extends TestCase
             'position' => 'junior',
         ];
         $response = $this->call('POST', 'ajax/member', $request);
+        $response
+            ->assertJson([
+                'errors' => true,
+                'status' => 422
+            ]);
         $this->assertDatabaseMissing('tbl_members', $request);
     }
 
@@ -102,6 +127,11 @@ class MemberTest extends TestCase
             'position' => 'junior',
         ];
         $response = $this->call('POST', 'ajax/member', $request);
+        $response
+            ->assertJson([
+                'errors' => true,
+                'status' => 422
+            ]);
         $this->assertDatabaseMissing('tbl_members', $request);
     }
 
@@ -115,6 +145,11 @@ class MemberTest extends TestCase
             'position' => 'junior',
         ];
         $response = $this->call('POST', 'ajax/member', $request);
+        $response
+            ->assertJson([
+                'errors' => true,
+                'status' => 422
+            ]);
         $this->assertDatabaseMissing('tbl_members', $request);
     }
     
@@ -128,6 +163,11 @@ class MemberTest extends TestCase
             'position' => 'junior',
         ];
         $response = $this->call('POST', 'ajax/member', $request);
+        $response
+            ->assertJson([
+                'errors' => true,
+                'status' => 422
+            ]);
         $this->assertDatabaseMissing('tbl_members', $request);
     }
 
@@ -141,6 +181,11 @@ class MemberTest extends TestCase
             'position' => 'junior',
         ];
         $response = $this->call('POST', 'ajax/member', $request);
+        $response
+            ->assertJson([
+                'errors' => true,
+                'status' => 422
+            ]);
         $this->assertDatabaseMissing('tbl_members', $request);
     }
 
@@ -154,6 +199,11 @@ class MemberTest extends TestCase
             'position' => 'junior',
         ];
         $response = $this->call('POST', 'ajax/member', $request);
+        $response
+            ->assertJson([
+                'errors' => true,
+                'status' => 422
+            ]);
         $this->assertDatabaseMissing('tbl_members', $request);
     }
 
@@ -167,6 +217,11 @@ class MemberTest extends TestCase
             'position' => 'junior',
         ];
         $response = $this->call('POST', 'ajax/member', $request);
+        $response
+            ->assertJson([
+                'errors' => true,
+                'status' => 422
+            ]);
         $this->assertDatabaseMissing('tbl_members', $request);
     }
 
@@ -180,6 +235,11 @@ class MemberTest extends TestCase
             'position' => '',
         ];
         $response = $this->call('POST', 'ajax/member', $request);
+        $response
+            ->assertJson([
+                'errors' => true,
+                'status' => 422
+            ]);
         $this->assertDatabaseMissing('tbl_members', $request);
     }
     // Test Success
@@ -188,7 +248,7 @@ class MemberTest extends TestCase
         Storage::fake('avatars');
         $file = UploadedFile::fake()->image('avatar.png');
         $request = [
-            'name' => 'Demo Test',
+            'name' => 'Thuy',
             'infomation' => 'Info Test',
             'phone' => '098428763733',
             'date_of_birth' => '1995-10-22',
@@ -196,41 +256,46 @@ class MemberTest extends TestCase
             'avatar' => $file
         ];
         $response = $this->json('POST', 'ajax/member', $request);
+        $response
+            ->assertStatus(201)
+            ->assertJson([
+                'errors' => false
+            ]);
         $request['avatar'] = $file->hashName();
         $this->assertDatabaseHas('tbl_members', $request);
     }
 
     public function testUpdateMemberSuccess()
     {
+        $member = factory(TblMember::class)->create();
         Storage::fake('avatars');
         $file = UploadedFile::fake()->image('avatar.png');
         $request = [
-            'name' => 'Demo Test',
+            'name' => 'Thuy',
             'infomation' => 'Info Test',
             'phone' => '098428763722',
             'date_of_birth' => '1995-10-22',
             'position' => 'junior',
             'avatar' => $file
         ];
-        $response = $this->json('POST', '/ajax/updateMember/1', $request);
+        $response = $this->json('POST', '/ajax/updateMember/'.$member->id, $request);
+        $response
+            ->assertStatus(201)
+            ->assertJson([
+                'errors' => false
+            ]);
         $request['avatar'] = $file->hashName();
         $this->assertDatabaseHas('tbl_members', $request);
     }
 
     public function testDeleteMember()
     {
-        $response = $this->call('delete', 'ajax/member/1');
+        $member = factory(TblMember::class)->create();
+        $response = $this->call('delete', 'ajax/member/'.$member->id);
         $response
             ->assertStatus(200)
             ->assertJson([
                 'errors' => false
             ]);
-        $this->assertDatabaseMissing('tbl_members', [
-            'name' => 'Thuy',
-            'infomation' => 'Infomation Thuy',
-            'phone' => '0984287637',
-            'date_of_birth' => '22-10-1995',
-            'position' => 'junior'
-        ]);
     }
 }

@@ -43,7 +43,7 @@
             $http(request)
             .then(function success(response) {
                 if (response.data.errors) {
-                    $scope.errors = response.data.errors;
+                    $scope.errors = response.data.msg;
                     toastr.error('Error');
                 } else {
                     $('#table_member').DataTable().ajax.reload();
@@ -86,7 +86,7 @@
             $http(request)
                 .then(function success(response) {
                     if (response.data.errors) {
-                        $scope.errors = response.data.errors;
+                        $scope.errors = response.data.msg;
                         toastr.error('Error');
                     } else {
                         $('#table_member').DataTable().ajax.reload();

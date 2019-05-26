@@ -14,7 +14,7 @@ use App\Models\TblProject;
 
 class UserRoleTest extends TestCase
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations;
     use WithoutMiddleware;
     /**
      * A basic test example.
@@ -24,38 +24,58 @@ class UserRoleTest extends TestCase
 
     public function testAddUserRoleSuccess()
     {
+        $member = factory(TblMember::class)->create();
+        $project = factory(TblProject::class)->create();
         $request = [
-            'project_id' => 3,
-            'member_id' => 3,
+            'project_id' => $project->id,
+            'member_id' => $member->id,
             'role' => 'DEV',
         ];
         $response = $this->call('POST', 'ajax/user_role', $request);
+        $response
+            ->assertStatus(201)
+            ->assertJson([
+                'errors' => false
+            ]);
         $this->assertDatabaseHas('tbl_user_roles', $request);
     }
 
     public function testUpdateUserRoleSuccess()
     {
+        $member = factory(TblMember::class)->create();
+        $project = factory(TblProject::class)->create();
+        $user_role = factory(TblUserRole::class)->create([
+            'project_id' => $project->id,
+            'member_id' => $member->id,
+            'role' => 'DEV'
+        ]);
         $request = [
             'role' => 'PM',
         ];
-        $response = $this->call('PUT', 'ajax/user_role/1', $request);
-        
+        $response = $this->call('PUT', 'ajax/user_role/'.$user_role->id, $request);
+        $response
+            ->assertStatus(201)
+            ->assertJson([
+                'errors' => false
+            ]);
         $this->assertDatabaseHas('tbl_user_roles', $request);
     }
 
     public function testDeleteUserRoleSuccess()
     {
-        $request = [
-            'project_id' => 1,
-            'member_id' => 1,
-            'role' => 'DEV',
-        ];
-        $response = $this->call('delete', 'ajax/user_role/1');
+        $member = factory(TblMember::class)->create();
+        $project = factory(TblProject::class)->create();
+        $user_role = factory(TblUserRole::class)->create([
+            'project_id' => $project->id,
+            'member_id' => $member->id,
+            'role' => 'DEV'
+        ]);
+        $response = $this->call('delete', 'ajax/user_role/'.$user_role->id);
         $response
             ->assertStatus(200)
             ->assertJson([
                 'errors' => false
             ]);
-        $this->assertDatabaseMissing('tbl_user_roles', $request);
+        
     }
 }

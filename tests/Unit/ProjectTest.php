@@ -12,7 +12,7 @@ use App\Models\TblProject;
 
 class ProjectTest extends TestCase
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations;
     use WithoutMiddleware;
     /**
      * A basic test example.
@@ -30,6 +30,11 @@ class ProjectTest extends TestCase
             'deadline' => '2019-06-01',
         ];
         $response = $this->call('POST', 'ajax/project', $request);
+        $response
+            ->assertJson([
+                'errors' => true,
+                'status' => 422
+            ]);
         $this->assertDatabaseMissing('tbl_projects', $request);
     }
 
@@ -43,6 +48,11 @@ class ProjectTest extends TestCase
             'deadline' => '2019-06-01',
         ];
         $response = $this->call('POST', 'ajax/project', $request);
+        $response
+            ->assertJson([
+                'errors' => true,
+                'status' => 422
+            ]);
         $this->assertDatabaseMissing('tbl_projects', $request);
     }
 
@@ -56,6 +66,11 @@ class ProjectTest extends TestCase
             'deadline' => '2019-06-01',
         ];
         $response = $this->call('POST', 'ajax/project', $request);
+        $response
+            ->assertJson([
+                'errors' => true,
+                'status' => 422
+            ]);
         $this->assertDatabaseMissing('tbl_projects', $request);
     }
 
@@ -69,6 +84,11 @@ class ProjectTest extends TestCase
             'deadline' => '2019-06-01',
         ];
         $response = $this->call('POST', 'ajax/project', $request);
+        $response
+            ->assertJson([
+                'errors' => true,
+                'status' => 422
+            ]);
         $this->assertDatabaseMissing('tbl_projects', $request);
     }
 
@@ -82,6 +102,11 @@ class ProjectTest extends TestCase
             'deadline' => '2019-06-010',
         ];
         $response = $this->call('POST', 'ajax/project', $request);
+        $response
+            ->assertJson([
+                'errors' => true,
+                'status' => 422
+            ]);
         $this->assertDatabaseMissing('tbl_projects', $request);
     }
 
@@ -95,6 +120,11 @@ class ProjectTest extends TestCase
             'deadline' => '2019-06-01',
         ];
         $response = $this->call('POST', 'ajax/project', $request);
+        $response
+            ->assertJson([
+                'errors' => true,
+                'status' => 422
+            ]);
         $this->assertDatabaseMissing('tbl_projects', $request);
     }
 
@@ -108,6 +138,11 @@ class ProjectTest extends TestCase
             'deadline' => '2019-06-01',
         ];
         $response = $this->call('POST', 'ajax/project', $request);
+        $response
+            ->assertJson([
+                'errors' => true,
+                'status' => 422
+            ]);
         $this->assertDatabaseMissing('tbl_projects', $request);
     }
     // Test Success
@@ -121,11 +156,17 @@ class ProjectTest extends TestCase
             'deadline' => '2019-06-01',
         ];
         $response = $this->call('POST', 'ajax/project', $request);
+        $response
+            ->assertStatus(201)
+            ->assertJson([
+                'errors' => false
+            ]);
         $this->assertDatabaseHas('tbl_projects', $request);
     }
 
     public function testUpdateProjectSuccess()
     {
+        $project = factory(TblProject::class)->create();
         $request = [
             'name' => 'AE',
             'infomation' => 'AE infomation',
@@ -133,19 +174,23 @@ class ProjectTest extends TestCase
             'status' => 'doing',
             'deadline' => '2019-06-01'
         ];
-        $response = $this->json('PUT', 'ajax/project/1', $request);
+        $response = $this->json('PUT', 'ajax/project/'.$project->id, $request);
+        $response
+        ->assertStatus(201)
+        ->assertJson([
+            'errors' => false
+        ]);
         $this->assertDatabaseHas('tbl_projects', $request);
     }
 
     public function testDeleteProjectSuccess()
     {
-        $response = $this->call('DELETE', 'ajax/project/1');
-        $this->assertDatabaseMissing('tbl_projects', [
-            'name' => 'AE',
-            'infomation' => 'AE project infomation',
-            'type' => 'lab',
-            'status' => 'planned',
-            'deadline' => '01-06-2019'
-        ]);
+        $project = factory(TblProject::class)->create();
+        $response = $this->call('DELETE', 'ajax/project/'.$project->id);
+        $response
+            ->assertStatus(200)
+            ->assertJson([
+                'errors' => false
+            ]);
     }
 }

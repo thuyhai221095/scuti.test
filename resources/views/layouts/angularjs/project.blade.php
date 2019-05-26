@@ -28,7 +28,7 @@
 				}
 			}).then(function (response) {
 				if (response.data.errors) {
-                    $scope.errors = response.data.errors;
+                    $scope.errors = response.data.msg;
                     toastr.error('Error');
                 } else {
                 	$('#table_project').DataTable().ajax.reload();
@@ -56,7 +56,7 @@
 				}
 			}).then(function (response) {
 				if (response.data.errors) {
-                    $scope.errors = response.data.errors;
+                    $scope.errors = response.data.msg;
                     toastr.error('Error');
                 } else {
                 	$('#table_project').DataTable().ajax.reload();
@@ -159,7 +159,7 @@
 				}
 			}).then(function (response) {
 				if (response.data.errors) {
-                    $scope.errors = response.data.errors;
+                    $scope.errors = response.data.msg;
                     toastr.error('Error');
                 } else {
                 	$('#table_project').DataTable().ajax.reload();
@@ -188,7 +188,7 @@
 				}
 			}).then(function (response) {
 				if (response.data.errors) {
-                    $scope.errors = response.data.errors;
+                    $scope.errors = response.data.msg;
                     toastr.error('Error');
                 } else {
                 	$scope.listMemberOfProject = response.data.data;
@@ -219,7 +219,7 @@
 						url: '{{ url('ajax/user_role') }}' + '/' + id
 					}).then(function (response) {
 						if (response.data.errors) {
-							$scope.errors = response.data.errors;
+							$scope.errors = response.data.msg;
 							toastr.error('Error');
 						} else {
 							$('#table_project').DataTable().ajax.reload();

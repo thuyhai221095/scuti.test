@@ -78,4 +78,72 @@ class UserRoleTest extends TestCase
             ]);
         
     }
+
+    // Test Faild
+    public function testAddMemberProjectEmpty()
+    {
+        $member = factory(TblMember::class)->create();
+        $request = [
+            'project_id' => '',
+            'member_id' => $member->id,
+            'role' => 'DEV',
+        ];
+        $response = $this->call('POST', 'ajax/user_role', $request);
+        $response
+            ->assertJson([
+                'errors' => true,
+                'status' => 422,
+                'msg' => [
+                    'project_id' => [
+                        0 => 'The project id field is required.'
+                    ]
+                ]
+            ]);
+        $this->assertDatabaseMissing('tbl_user_roles', $request);
+    }
+
+    public function testAddMemberMemberEmpty()
+    {
+        $project = factory(TblProject::class)->create();
+        $request = [
+            'project_id' => $project->id,
+            'member_id' => '',
+            'role' => 'DEV',
+        ];
+        $response = $this->call('POST', 'ajax/user_role', $request);
+        $response
+            ->assertJson([
+                'errors' => true,
+                'status' => 422,
+                'msg' => [
+                    'member_id' => [
+                        0 => 'The member field is required.'
+                    ]
+                ]
+            ]);
+        $this->assertDatabaseMissing('tbl_user_roles', $request);
+    }
+
+    public function testAddMemberRoleEmpty()
+    {
+        $project = factory(TblProject::class)->create();
+        $member = factory(TblMember::class)->create();
+        $request = [
+            'project_id' => $project->id,
+            'member_id' => $member->id,
+            'role' => '',
+        ];
+        $response = $this->call('POST', 'ajax/user_role', $request);
+        $response
+            ->assertJson([
+                'errors' => true,
+                'status' => 422,
+                'msg' => [
+                    'role' => [
+                        0 => 'The role field is required.'
+                    ]
+                ]
+            ]);
+        $this->assertDatabaseMissing('tbl_user_roles', $request);
+    }
 }

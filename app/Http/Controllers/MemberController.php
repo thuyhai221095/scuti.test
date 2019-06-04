@@ -3,28 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\MemberService;
+use App\Models\User;
 use App\Models\TblMember;
-use File;
 
 class MemberController extends Controller
 {
+    protected $members;
+
+    public function __construct(MemberService $members)
+    {
+        $this->members = $members;
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user, TblMember $member)
     {
         return view('member');
     }
 
     public function getAvatar($name)
     {
-        $path = storage_path('app/public/').$name;
-        if (!File::exists($path)) {
-            $path = storage_path('app/public/') . 'default.png';
-        }
-        return response()->file($path);
+        return $this->members->getAvatar($name);
     }
     /**
      * Show the form for creating a new resource.

@@ -26,6 +26,7 @@ class MemberRequest extends FormRequest
      */
     public function rules()
     {
+    	
         switch ($this->segment(2)) {
             case 'member':
                 return array(

@@ -75,7 +75,7 @@ class ProjectTest extends TestCase
     public function testAddProjectNameEmpty()
     {
         $request = [
-            'name' => '',
+            'name' => 'T',
             'infomation' => 'AE project infomation',
             'type' => 'lab',
             'status' => 'planned',

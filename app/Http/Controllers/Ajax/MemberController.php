@@ -7,12 +7,18 @@ use App\Http\Controllers\Controller;
 use Yajra\Datatables\Datatables;
 use App\Models\TblMember;
 use App\Http\Requests\MemberRequest;
-use DB;
+use DB, Auth;
 use Response;
-use App\Models\TblMember as AppTblMember;
+use App\Services\MemberService;
 
 class MemberController extends Controller
 {
+    protected $members;
+
+    public function __construct(MemberService $members)
+    {
+        $this->members = $members;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -83,13 +89,7 @@ class MemberController extends Controller
     {
         DB::beginTransaction();
         try {
-            $input = $request->all();
-            $input['date_of_birth'] = date("Y-m-d", strtotime($request->date_of_birth));
-            if ($request->hasFile('avatar')) {
-                $file = $request->file('avatar')->store('', 'public');
-                $input['avatar'] = $file;
-            }
-            $member = TblMember::create($input);
+            $this->members->create($request->all());
             DB::commit();
             return response([
                 'errors' => false,
@@ -134,14 +134,7 @@ class MemberController extends Controller
     {
         DB::beginTransaction();
         try {
-            $member = TblMember::find($request->id);
-            $input = $request->all();
-            $input['date_of_birth'] = date("Y-m-d", strtotime($request->date_of_birth));
-            if ($request->hasFile('avatar')) {
-                $file = $request->file('avatar')->store('', 'public');
-                $input['avatar'] = $file;
-            }
-            $member->update($input);
+            $this->members->update($id, $request->all());
             DB::commit();
             return Response::json([
                 'errors' => false,
@@ -160,11 +153,22 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-        $data = TblMember::find($id);
-        $data->delete();
-        return Response::json([
-            'errors' => false,
-            'msg' => 'Delete successfully'
-        ], 200);
+        $user = Auth::user();
+        $member = TblMember::find($id);
+        // $this->authorize('delete', $member);
+        if ($user->can('delete', $member)) {
+            $this->members->destroy($id);
+            return Response::json([
+                'errors' => false,
+                'msg' => 'Delete successfully'
+            ], 200);
+        } else {
+            return Response::json([
+                'errors' => false,
+                'msg' => 'No Role'
+            ], 401);
+        }
+       
+       
     }
 }

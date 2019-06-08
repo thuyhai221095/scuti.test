@@ -95,7 +95,7 @@ class MemberRequest extends FormRequest
             [
                 'errors' => true,
                 'status' => 422,
-                'msg' => $errors
+                'msg'    => $errors
             ]
         ), 422);
     }

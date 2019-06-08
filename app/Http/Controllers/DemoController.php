@@ -23,7 +23,7 @@ class DemoController extends Controller
      */
     public function create()
     {
-        //
+        dd(2);
     }
 
     /**
@@ -34,7 +34,7 @@ class DemoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd(4);
     }
 
     /**

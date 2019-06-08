@@ -3,32 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Services\MemberService;
-use App\Models\User;
-use App\Models\TblMember;
 
-class MemberController extends Controller
+class DemoController extends Controller
 {
-    protected $members;
-
-    public function __construct(MemberService $members)
-    {
-        $this->members = $members;
-    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(User $user, TblMember $member)
+    public function index()
     {
-        return view('member');
+        dd(1);
     }
 
-    public function getAvatar($name)
-    {
-        return $this->members->getAvatar($name);
-    }
     /**
      * Show the form for creating a new resource.
      *
